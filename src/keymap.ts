@@ -6,4 +6,9 @@ const keys = [
   "ArrowRight"
 ];
 
-export default keys;
+const keyMap = keys.reduce<{ [key: string]: boolean }>((acc, curr) => ({
+  ...acc,
+  [curr]: false,
+}), {});
+
+export default keyMap;
