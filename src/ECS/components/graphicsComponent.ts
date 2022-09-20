@@ -1,4 +1,5 @@
 import * as PIXI from "pixi.js";
+import componentTypes from "../componentTypes";
 
 const graphicsComponent = (
   x = 35,
@@ -13,7 +14,7 @@ const graphicsComponent = (
   gr.endFill();
 
   return {
-    name: 'graphics',
+    name: componentTypes.GRAPHICS,
     mounted: false,
     graphicsObj: gr,
   }

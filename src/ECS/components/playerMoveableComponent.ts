@@ -1,6 +1,8 @@
+import componentTypes from "../componentTypes";
+
 const playerMovableComponent = () => {
   return {
-    name: 'playerMovable',
+    name: componentTypes.PLAYER_MOVABLE,
   }
 };
 

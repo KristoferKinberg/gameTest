@@ -1,6 +1,7 @@
 import keyMap from "../../keymap";
 import {appHeight, appWidth} from "../../constants";
 import * as PIXI from 'pixi.js'
+import componentTypes from "../componentTypes";
 
 const handleUserInputSystem = (entities: any) => {
   const isTopEdgeOfScreen = (playerObj: PIXI.Graphics) => {
@@ -41,10 +42,10 @@ const handleUserInputSystem = (entities: any) => {
 
   return entities
     .forEach(({ getComponent }: any) => {
-      const isPLayerMovable = getComponent('playerMovable');
+      const isPLayerMovable = getComponent(componentTypes.PLAYER_MOVABLE);
 
       if (isPLayerMovable) {
-        const { graphicsObj } = getComponent('graphics');
+        const { graphicsObj } = getComponent(componentTypes.GRAPHICS);
 
         handleInput(graphicsObj)
       }
