@@ -1,6 +1,6 @@
 import componentTypes from "../componentTypes";
 import {appHeight, appWidth} from "../../constants";
-import entityManager from "../entityManager";
+import entityManager from "../entity/entityManager";
 import eatableComponent from "../components/eatableComponent";
 import graphicsComponent from "../components/graphicsComponent";
 

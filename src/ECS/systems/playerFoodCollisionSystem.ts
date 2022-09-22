@@ -1,4 +1,4 @@
-import entityManager from "../entityManager";
+import entityManager from "../entity/entityManager";
 import componentTypes from "../componentTypes";
 import didCollide from "../../utils/collision";
 
@@ -19,6 +19,7 @@ const playerFoodCollisionSystem = (entities: any) => entities
 
         if (mounted && didCollide(graphicsObj, playerGraphics)) {
           graphicsObj.destroy();
+          entity.getComponent(componentTypes.SCORE).score++;
           eatable.destroy();
         }
       });
