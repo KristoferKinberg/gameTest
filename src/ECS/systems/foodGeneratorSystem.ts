@@ -17,7 +17,7 @@ const foodGeneratorSystem = (entities: any) => entities
     });
 
 
-    if (component && component.shouldGenerate) {
+    if (component && component.getShouldGenerate()) {
       const foodEntity = entityManager.createEntity();
       const {x, y} = getRandomCoordinates();
 

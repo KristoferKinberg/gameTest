@@ -1,5 +1,6 @@
 import {v4 as uuidv4} from "uuid";
 import EntityManager from "./entityManager";
+import componentTypes from "../componentTypes";
 
 const entityGenerator = () => {
   const id = uuidv4();
@@ -7,12 +8,14 @@ const entityGenerator = () => {
 
   const addComponent = (component: any) => components.push(component)
 
-  const removeComponent = (componentName: string) => {
-    components = components.filter(({ name }) => name !== componentName)
+  const removeComponent = (componentName: componentTypes) => {
+    components = components.filter(({ getName }) => getName() !== componentName)
   }
 
-  const getComponent = (componentName: string) =>
-    components.find(({ name }) => componentName === name);
+  const getComponent = (componentName: componentTypes) =>
+    components.find(({ getName }) => componentName === getName());
+
+  const hasComponent = (componentName: componentTypes) => components.some(({ name }) => name === componentName);
 
   const destroy = () => EntityManager.destroyEntity(id);
 
@@ -22,6 +25,7 @@ const entityGenerator = () => {
     addComponent,
     removeComponent,
     getComponent,
+    hasComponent,
     destroy,
   }
 };

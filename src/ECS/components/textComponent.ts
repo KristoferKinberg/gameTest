@@ -26,6 +26,9 @@ const textComponent = ({
   x = 35,
   y = 35,
 }: IParams) => {
+  const _name = componentTypes.TEXT;
+  let _mounted = false;
+
   // @ts-ignore
   const mergedStyles: PIXI.TextStyle = {
     fontFamily: 'Arial',
@@ -40,13 +43,22 @@ const textComponent = ({
   textObj.position.y = y;
   stage.addChild(textObj);
 
+  const getName = () => _name;
+
+  const getMounted = () => _mounted;
+
+  const setMounted = (mounted: boolean) => _mounted = mounted;
+
+  const getId = () => id;
+
+  const setText = (text: string) => textObj.text = text;
+
   return {
-    name: componentTypes.TEXT,
-    mounted: false,
-    id,
-    textObj,
-    x,
-    y
+    getName,
+    getMounted,
+    setMounted,
+    getId,
+    setText,
   }
 };
 

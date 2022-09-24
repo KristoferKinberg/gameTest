@@ -9,12 +9,10 @@ const updatePlayerPointsSystem = () => {
   textHoldingEntities
     .forEach(({ components }) => {
       return components.forEach((component: any) => {
-        if (component.id === 'scoreValue') {
+        if (component.getId() === 'scoreValue') {
           const scoreComponent = playerEntity.components
-            .find(({ name }: any) => name === componentTypes.SCORE);
-
-          console.log(scoreComponent);
-          component.textObj.text = scoreComponent.score;
+            .find(({ getName }: any) => getName() === componentTypes.SCORE);
+          component.setText(scoreComponent.getScore())
         }
       });
     });

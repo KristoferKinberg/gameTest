@@ -1,9 +1,19 @@
 import componentTypes from "../componentTypes";
 
-const scoreComponent = () => {
+const scoreComponent = (initialScore = 0) => {
+  const _name = componentTypes.SCORE;
+  let _score = initialScore;
+
+  const getName = () => _name;
+
+  const getScore = () => _score;
+
+  const setScore = (score: number) => _score = score;
+
   return {
-    name: componentTypes.SCORE,
-    score: 0,
+    getName,
+    getScore,
+    setScore,
   }
 };
 

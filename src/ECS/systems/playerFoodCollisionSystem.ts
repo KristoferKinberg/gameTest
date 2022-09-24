@@ -8,18 +8,20 @@ const playerFoodCollisionSystem = (entities: any) => entities
 
     if (!isPLayerMovable) return;
 
-    const playerGraphics = entity.getComponent(componentTypes.GRAPHICS).graphicsObj;
+    const playerGraphics = entity.getComponent(componentTypes.GRAPHICS).getGraphicsObject();
     //const newSize = playerGraphics.width + 2;
     const entitiesWithEatableComponent = entityManager.getEntitiesByComponents([componentTypes.EATABLE]);
     //playerGraphics.scale.set(newSize, newSize);
 
     entitiesWithEatableComponent
       .forEach((eatable: any) => {
-        const { graphicsObj, mounted } = eatable.getComponent(componentTypes.GRAPHICS);
+        const { isMounted, getGraphicsObject } = eatable.getComponent(componentTypes.GRAPHICS);
 
-        if (mounted && didCollide(graphicsObj, playerGraphics)) {
-          graphicsObj.destroy();
-          entity.getComponent(componentTypes.SCORE).score++;
+        if (isMounted() && didCollide(getGraphicsObject(), playerGraphics)) {
+          const scoreComponent = entity.getComponent(componentTypes.SCORE);
+          getGraphicsObject().destroy();
+
+          scoreComponent.setScore(scoreComponent.getScore() + 1);
           eatable.destroy();
         }
       });

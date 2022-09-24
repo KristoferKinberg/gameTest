@@ -1,8 +1,15 @@
 import componentTypes from "../componentTypes";
+import {IRootComponent} from "../../types";
 
-const eatableComponent = () => {
+export interface IEatableComponent extends IRootComponent {}
+
+const eatableComponent = (): IEatableComponent => {
+  const _name = componentTypes.EATABLE;
+
+  const getName = () => _name;
+
   return {
-    name: componentTypes.EATABLE,
+    getName,
   }
 };
 

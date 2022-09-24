@@ -43,11 +43,11 @@ const handleUserInputSystem = (entities: any) => {
   return entities
     .forEach(({ getComponent }: any) => {
       const isPLayerMovable = getComponent(componentTypes.PLAYER_MOVABLE);
+      const graphicsComponent = getComponent(componentTypes.GRAPHICS);
 
-      if (isPLayerMovable) {
-        const { graphicsObj } = getComponent(componentTypes.GRAPHICS);
+      if (isPLayerMovable && graphicsComponent) {
 
-        handleInput(graphicsObj)
+        handleInput(graphicsComponent.getGraphicsObject())
       }
     });
 }
