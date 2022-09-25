@@ -1,6 +1,7 @@
 import componentTypes from "../componentTypes";
 import {Text} from "pixi.js";
 import * as PIXI from 'pixi.js'
+import {IRootComponent} from "../../types";
 
 interface IStyle {
   fontFamily?: string;
@@ -16,6 +17,13 @@ interface IParams {
   style?: IStyle;
   x?: number;
   y?: number;
+}
+
+export interface ITextComponent extends IRootComponent {
+  isMounted: () => boolean;
+  setMounted: (isMounted: boolean) => boolean;
+  getId: () => IParams["id"];
+  setText: () => IParams["text"]
 }
 
 const textComponent = ({

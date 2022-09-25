@@ -1,7 +1,8 @@
 import componentTypes from "../componentTypes";
+import {ISystemParams} from "./index";
 
-const foodTimerSystem = (entities: any) => entities
-  .forEach(({ getComponent }: any) => {
+const foodTimerSystem = ({entities}: ISystemParams) =>
+  entities.forEach(({ getComponent }: any) => {
     const component = getComponent(componentTypes.FOOD_TIMER);
 
     if (component) {
@@ -18,4 +19,7 @@ const foodTimerSystem = (entities: any) => entities
     return;
   });
 
-export default foodTimerSystem;
+export default {
+  system: foodTimerSystem,
+  dependencies: [componentTypes.FOOD_TIMER]
+};

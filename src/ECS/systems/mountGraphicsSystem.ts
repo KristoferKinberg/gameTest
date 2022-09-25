@@ -1,7 +1,8 @@
 import componentTypes from "../componentTypes";
+import {ISystemParams} from "./index";
 
-const mountGraphicsSystem = (entities: any, app: any) => entities
-  .forEach(({ getComponent }: any) => {
+const mountGraphicsSystem = ({ entities, app }: ISystemParams) =>
+  entities.forEach(({ getComponent }: any) => {
     const component = getComponent(componentTypes.GRAPHICS);
 
     if (component && !component.isMounted()) {
@@ -10,4 +11,7 @@ const mountGraphicsSystem = (entities: any, app: any) => entities
     }
   });
 
-export default mountGraphicsSystem;
+export default {
+  system: mountGraphicsSystem,
+  dependencies: [componentTypes.GRAPHICS]
+};

@@ -1,8 +1,14 @@
 import entityGenerator from "./entityGenerator";
 import componentTypes from "../componentTypes";
+import {IComponent} from "../components";
 
-interface IEntities {
-  [key: string]: any;
+export interface IEntity {
+  id: string;
+  components: IComponent[];
+}
+
+export interface IEntities {
+  [key: string]: IEntity;
 }
 
 const entityManager = () => {
@@ -15,6 +21,8 @@ const entityManager = () => {
   }
 
   const getEntities = () => entities;
+
+  const getEntititesAsArray = () => Object.values(entities);
 
   const destroyEntity = (id: string) => {
     const { [id]: entityToRemove, ...rest } = entities;
@@ -29,17 +37,27 @@ const entityManager = () => {
     return components.some(({ getName }) => getName() === componentType);
   });
 
-  const entityHasComponent = (entity: any, componentType: componentTypes) => {
+  const entityHasComponent = (entity: IEntity, componentType: componentTypes) => {
     return entity.components.some(({ getName }) => getName() === componentType);
   }
+
+  const getUsedComponentTypes = () => {
+    const uniques = Object.values(entities).reduce((acc, curr) => {
+      return acc.add(curr.components.map(({ getName }) => getName()));
+    }, new Set())
+
+    return [...uniques].flat();
+  };
 
   return {
     createEntity,
     getEntities,
+    getEntititesAsArray,
     getEntitiesByComponents,
     destroyEntity,
     getEntityByComponent,
     entityHasComponent,
+    getUsedComponentTypes,
   }
 };
 

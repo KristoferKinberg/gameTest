@@ -1,9 +1,10 @@
 import entityManager from "../entity/entityManager";
 import componentTypes from "../componentTypes";
 import didCollide from "../../utils/collision";
+import {ISystemParams} from "./index";
 
-const playerFoodCollisionSystem = (entities: any) => entities
-  .forEach((entity: any) => {
+const playerFoodCollisionSystem = ({ entities }: ISystemParams) =>
+  entities.forEach((entity: any) => {
     const isPLayerMovable = entity.getComponent(componentTypes.PLAYER_MOVABLE);
 
     if (!isPLayerMovable) return;
@@ -27,4 +28,7 @@ const playerFoodCollisionSystem = (entities: any) => entities
       });
   });
 
-export default playerFoodCollisionSystem;
+export default {
+  system: playerFoodCollisionSystem,
+  dependencies: [componentTypes.PLAYER_MOVABLE, componentTypes.EATABLE]
+};

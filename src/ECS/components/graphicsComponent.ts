@@ -1,12 +1,29 @@
 import * as PIXI from "pixi.js";
 import componentTypes from "../componentTypes";
+import {IRootComponent} from "../../types";
+
+interface IPosition {
+  x: number;
+  y: number;
+}
+
+export interface IGraphicsComponent extends IRootComponent {
+  isMounted: () => boolean;
+  setMounted: (isMounted: boolean) => boolean;
+  getPosition: () => {
+    x: number;
+    y: number;
+  };
+  setPosition: ({ x, y }: IPosition) => void;
+  getGraphicsObject: () => PIXI.Graphics;
+}
 
 const graphicsComponent = (
   x = 35,
   y = 35,
   r = 30,
   color = 0xffffff
-) => {
+): IGraphicsComponent => {
   const _name = componentTypes.GRAPHICS;
   const _gr  = new PIXI.Graphics();
   let _mounted = false;

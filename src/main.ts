@@ -6,7 +6,7 @@ import playerMovableComponent from "./ECS/components/playerMoveableComponent";
 import keyMap from "./keymap";
 import {appHeight, appWidth} from "./constants";
 import foodTimerComponent from "./ECS/components/foodTimerComponent";
-import systems from './ECS/systems'
+import SystemsMananger from './ECS/systems'
 import scoreComponent from "./ECS/components/scoreComponent";
 import textComponent from "./ECS/components/textComponent";
 
@@ -56,9 +56,7 @@ const gameLoop = (timeStamp: any) => {
   secondsPassed = (timeStamp - oldTimeStamp) / 1000;
   oldTimeStamp = timeStamp;
 
-  systems.forEach((system: any) => {
-    system(Object.values(entityManager.getEntities()), app);
-  })
+  SystemsMananger.runSystems(app, secondsPassed);
 
   window.requestAnimationFrame(gameLoop);
 }

@@ -2,8 +2,9 @@ import keyMap from "../../keymap";
 import {appHeight, appWidth} from "../../constants";
 import * as PIXI from 'pixi.js'
 import componentTypes from "../componentTypes";
+import {ISystemParams} from "./index";
 
-const handleUserInputSystem = (entities: any) => {
+const handleUserInputSystem = ({ entities }: ISystemParams) => {
   const isTopEdgeOfScreen = (playerObj: PIXI.Graphics) => {
     const yPosition = playerObj.getBounds().y;
     return (yPosition - 3) < 0;
@@ -52,4 +53,7 @@ const handleUserInputSystem = (entities: any) => {
     });
 }
 
-export default handleUserInputSystem;
+export default {
+  system: handleUserInputSystem,
+  dependencies: [componentTypes.PLAYER_MOVABLE, componentTypes.GRAPHICS],
+};

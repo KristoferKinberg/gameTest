@@ -3,9 +3,10 @@ import {appHeight, appWidth} from "../../constants";
 import entityManager from "../entity/entityManager";
 import eatableComponent from "../components/eatableComponent";
 import graphicsComponent from "../components/graphicsComponent";
+import {ISystemParams} from "./index";
 
-const foodGeneratorSystem = (entities: any) => entities
-  .forEach(({ getComponent }: any) => {
+const foodGeneratorSystem = ({entities}: ISystemParams) =>
+  entities.forEach(({ getComponent }: any) => {
     const component = getComponent(componentTypes.FOOD_TIMER);
 
     /**
@@ -16,7 +17,6 @@ const foodGeneratorSystem = (entities: any) => entities
       x: Math.floor(Math.random() * appHeight)
     });
 
-
     if (component && component.getShouldGenerate()) {
       const foodEntity = entityManager.createEntity();
       const {x, y} = getRandomCoordinates();
@@ -26,4 +26,7 @@ const foodGeneratorSystem = (entities: any) => entities
     }
   });
 
-export default foodGeneratorSystem;
+export default {
+  system: foodGeneratorSystem,
+  dependencies: [componentTypes.FOOD_TIMER]
+};

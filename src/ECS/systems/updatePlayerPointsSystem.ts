@@ -1,6 +1,6 @@
 import entityManager from "../entity/entityManager";
 import componentTypes from "../componentTypes";
-
+import {IScoreComponent} from "../components/scoreComponent";
 
 const updatePlayerPointsSystem = () => {
   const textHoldingEntities = entityManager.getEntitiesByComponents([componentTypes.TEXT]);
@@ -9,13 +9,17 @@ const updatePlayerPointsSystem = () => {
   textHoldingEntities
     .forEach(({ components }) => {
       return components.forEach((component: any) => {
-        if (component.getId() === 'scoreValue') {
-          const scoreComponent = playerEntity.components
+        if (component.getId() === 'scoreValue' && playerEntity) {
+          const scoreComponent: (IScoreComponent | undefined) = playerEntity.components
             .find(({ getName }: any) => getName() === componentTypes.SCORE);
-          component.setText(scoreComponent.getScore())
+
+          if (scoreComponent) component.setText(scoreComponent.getScore())
         }
       });
     });
 }
 
-export default updatePlayerPointsSystem;
+export default {
+  system: updatePlayerPointsSystem,
+  dependencies: [componentTypes.TEXT, componentTypes.PLAYER_MOVABLE]
+};
