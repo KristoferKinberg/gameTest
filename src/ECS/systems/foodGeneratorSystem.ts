@@ -1,5 +1,5 @@
 import componentTypes from "../componentTypes";
-import {appWidth} from "../../constants";
+import {appWidth, foodMaxR} from "../../constants";
 import entityManager from "../entity/entityManager";
 import eatableComponent from "../components/eatableComponent";
 import graphicsComponent from "../components/graphicsComponent";
@@ -8,7 +8,7 @@ import {ISystemParams} from "./index";
 const foodGeneratorSystem = ({entities}: ISystemParams) =>
   entities.forEach(({ getComponent }: any) => {
     const component = getComponent(componentTypes.FOOD_TIMER);
-    const r = Math.floor(Math.random() * 100);
+    const r = Math.floor(Math.random() * foodMaxR);
 
     /**
      * Generate random components for food

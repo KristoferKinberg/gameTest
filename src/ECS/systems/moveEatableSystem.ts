@@ -2,16 +2,18 @@ import componentTypes from "../componentTypes";
 import {ISystemParams} from "./index";
 import EntityManager from "../entity/entityManager";
 import {IGraphicsComponent} from "../components/graphicsComponent";
-import {appWidth} from "../../constants";
+import {appWidth, foodMaxR} from "../../constants";
 
-const moveEatableSystems = ({}: ISystemParams) => {
+const moveEatableSystems = ({ secondsPassed }: ISystemParams) => {
   const EatableEntities = EntityManager.getEntitiesByComponents([componentTypes.EATABLE]);
 
   EatableEntities.forEach((entity) => {
     const grahpicsComponent = entity.getComponent<IGraphicsComponent>(componentTypes.GRAPHICS);
     // @ts-ignore
     const graphicsObject = grahpicsComponent.getGraphicsObject();
-    const newXPosition = graphicsObject.position.x + 5;
+    const xValue = (foodMaxR - (graphicsObject.width / 2)) / 15;
+    const newXPosition = (graphicsObject.position.x + xValue);
+
     const shouldDestroy = (newXPosition - graphicsObject.width) > appWidth;
 
     if (shouldDestroy) {
