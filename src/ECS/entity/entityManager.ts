@@ -1,11 +1,5 @@
-import entityGenerator from "./entityGenerator";
+import entityGenerator, {IEntity} from "./entityGenerator";
 import componentTypes from "../componentTypes";
-import {IComponent} from "../components";
-
-export interface IEntity {
-  id: string;
-  components: IComponent[];
-}
 
 export interface IEntities {
   [key: string]: IEntity;

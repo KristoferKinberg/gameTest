@@ -3,11 +3,21 @@ import EntityManager from "./entityManager";
 import componentTypes from "../componentTypes";
 import {IComponent} from "../components";
 
-const entityGenerator = () => {
+export interface IEntity {
+  id: string;
+  components: IComponent[];
+  getComponent<Component>(componentType: componentTypes): Component | undefined;
+  addComponent(component: IComponent): number;
+  removeComponent(componentName: componentTypes): void;
+  hasComponent(componentName: componentTypes): boolean;
+  destroy(): void;
+}
+
+const entityGenerator = (): IEntity => {
   const id = uuidv4();
   let components: IComponent[] = [];
 
-  const addComponent = (component: any) => components.push(component)
+  const addComponent = (component: IComponent) => components.push(component)
 
   const removeComponent = (componentName: componentTypes) => {
     components = components.filter(({ getName }) => getName() !== componentName)

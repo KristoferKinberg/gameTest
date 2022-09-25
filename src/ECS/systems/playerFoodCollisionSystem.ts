@@ -5,7 +5,7 @@ import {ISystemParams} from "./index";
 
 const playerFoodCollisionSystem = ({ entities }: ISystemParams) =>
   entities.forEach((entity: any) => {
-    const isPLayerMovable = entity.getComponent(componentTypes.PLAYER_MOVABLE);
+    const isPLayerMovable = entity.hasComponent(componentTypes.PLAYER_MOVABLE);
 
     if (!isPLayerMovable) return;
 
@@ -23,7 +23,7 @@ const playerFoodCollisionSystem = ({ entities }: ISystemParams) =>
           getGraphicsObject().destroy();
 
           scoreComponent.setScore(scoreComponent.getScore() + 1);
-          playEatSound();
+          //playEatSound();
           eatable.destroy();
         }
       });
