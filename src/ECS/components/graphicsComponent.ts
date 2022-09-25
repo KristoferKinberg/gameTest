@@ -18,15 +18,24 @@ export interface IGraphicsComponent extends IRootComponent {
   getGraphicsObject: () => PIXI.Graphics;
 }
 
-const graphicsComponent = (
-  x = 35,
-  y = 35,
-  r = 30,
-  color = 0xffffff
-): IGraphicsComponent => {
+interface IProps {
+  x?: number;
+  y?: number;
+  r?: number;
+  color?: number;
+  border?: {
+    color: number;
+    thickness: number;
+  }
+}
+
+const graphicsComponent = (props?: IProps): IGraphicsComponent => {
   const _name = componentTypes.GRAPHICS;
   const _gr  = new PIXI.Graphics();
+  const baseSettings = { x: 35, y: 35, r: 30, color: 0xffffff, border: false };
   let _mounted = false;
+
+  const { x, y, r, color } = { ...baseSettings, ...props };
 
   _gr.beginFill(color);
   _gr.drawCircle(x, y, r);

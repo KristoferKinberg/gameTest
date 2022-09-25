@@ -9,11 +9,18 @@ import foodTimerComponent from "./ECS/components/foodTimerComponent";
 import SystemsMananger from './ECS/systems'
 import scoreComponent from "./ECS/components/scoreComponent";
 import textComponent from "./ECS/components/textComponent";
+import gameRunningComponent, {IGameRunningComponent} from "./ECS/components/gameRunningComponent";
+import componentTypes from "./ECS/componentTypes";
 
 const app = new PIXI.Application({ width: appWidth, height: appHeight });
 
 const playerEntity = entityManager.createEntity();
-playerEntity.addComponent(graphicsComponent());
+const r = 30;
+playerEntity.addComponent(graphicsComponent({
+  x: (appWidth / 2) - r,
+  y: (appHeight / 2) - r,
+  r,
+}));
 playerEntity.addComponent(playerMovableComponent());
 playerEntity.addComponent(scoreComponent());
 
@@ -33,6 +40,7 @@ scoreEntity.addComponent(textComponent({
 
 const gameEntity = entityManager.createEntity();
 gameEntity.addComponent(foodTimerComponent());
+gameEntity.addComponent(gameRunningComponent({ running: true }));
 
 document
   .getElementById('game')
@@ -41,17 +49,19 @@ document
 let secondsPassed: number;
 //let fps: number;
 let oldTimeStamp: any;
-let stop = false;
 
-window.addEventListener('keydown', (e) => {
+/**window.addEventListener('keydown', (e) => {
   if (e.key === 'Escape') stop = true
-});
+});*/
 
 window.addEventListener('keydown', (e) => keyMap[e.key] = true);
 window.addEventListener('keyup', (e) => keyMap[e.key] = false);
 
 const gameLoop = (timeStamp: any) => {
-  if (stop) return;
+  const gameEntity = entityManager.getEntityByComponent(componentTypes.GAME_RUNNING);
+  const gameRunning = gameEntity.getComponent<IGameRunningComponent>(componentTypes.GAME_RUNNING).isRunning();
+
+  if (!gameRunning) return;
 
   secondsPassed = (timeStamp - oldTimeStamp) / 1000;
   oldTimeStamp = timeStamp;
