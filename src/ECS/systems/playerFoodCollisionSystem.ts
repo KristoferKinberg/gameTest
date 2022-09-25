@@ -23,7 +23,7 @@ const playerFoodCollisionSystem = ({ entities, app }: ISystemParams) =>
 
       playerGraphicsObject.clear();
       playerGraphicsObject.beginFill(0xffffff);
-      playerGraphicsObject.drawCircle(0 ,0, previousRadius + 2);
+      playerGraphicsObject.drawCircle(0, 0, previousRadius + 2);
       playerGraphicsObject.endFill();
     };
 
@@ -52,6 +52,7 @@ const playerFoodCollisionSystem = ({ entities, app }: ISystemParams) =>
               .getEntityByComponent(componentTypes.GAME_RUNNING)
               .getComponent(componentTypes.GAME_RUNNING);
             gameRunningsComponent.setRunning(false);
+            return;
           }
 
           const scoreComponent = entity.getComponent(componentTypes.SCORE);
