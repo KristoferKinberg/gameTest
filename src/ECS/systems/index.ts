@@ -8,15 +8,6 @@ import componentTypes from "../componentTypes";
 import EntityManager, {IEntity} from "../entity/entityManager";
 import * as PIXI from 'pixi.js'
 
-export const systemsObjects = [
-  mountGraphicsSystem,
-  handleUserInputSystem,
-  foodGeneratorSystem,
-  foodTimerSystem,
-  playerFoodCollision,
-  updatePlayerPointsSystem,
-];
-
 export interface ISystemParams {
   entities: IEntity[],
   app: PIXI.Application,
@@ -40,22 +31,6 @@ export const systemsManager = () => {
     updatePlayerPointsSystem,
   ];
 
-  /**
-   * register a system
-   *
-   * @param system
-   * @param dependencies
-   */
-  const registerSystem = (system: ISystem, ...dependencies: componentTypes[]) => {
-    systems = [
-      ...systems,
-      {
-        system,
-        dependencies,
-      }
-    ];
-  };
-
   const requiredComponentsAreInUse = (dependencies: componentTypes[]) => {
     const usedComponents = EntityManager.getUsedComponentTypes();
     return dependencies.every((dependency) => usedComponents.includes(dependency));
@@ -73,7 +48,7 @@ export const systemsManager = () => {
     });
   }
 
-  return { runSystems, registerSystem }
+  return { runSystems }
 }
 
 export default systemsManager();

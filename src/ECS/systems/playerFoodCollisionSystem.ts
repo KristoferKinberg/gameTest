@@ -10,9 +10,7 @@ const playerFoodCollisionSystem = ({ entities }: ISystemParams) =>
     if (!isPLayerMovable) return;
 
     const playerGraphics = entity.getComponent(componentTypes.GRAPHICS).getGraphicsObject();
-    //const newSize = playerGraphics.width + 2;
     const entitiesWithEatableComponent = entityManager.getEntitiesByComponents([componentTypes.EATABLE]);
-    //playerGraphics.scale.set(newSize, newSize);
 
     entitiesWithEatableComponent
       .forEach((eatable: any) => {

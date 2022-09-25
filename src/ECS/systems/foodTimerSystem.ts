@@ -1,7 +1,7 @@
 import componentTypes from "../componentTypes";
 import {ISystemParams} from "./index";
 
-const foodTimerSystem = ({entities}: ISystemParams) =>
+const foodTimerSystem = ({ entities }: ISystemParams) =>
   entities.forEach(({ getComponent }: any) => {
     const component = getComponent(componentTypes.FOOD_TIMER);
 
