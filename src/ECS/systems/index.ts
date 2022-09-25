@@ -9,6 +9,7 @@ import componentTypes from "../componentTypes";
 import EntityManager from "../entity/entityManager";
 import * as PIXI from 'pixi.js'
 import {IEntity} from "../entity/entityGenerator";
+import speedSystem from "./speedSystem";
 
 export interface ISystemParams {
   entities: IEntity[],
@@ -31,7 +32,8 @@ export const systemsManager = () => {
     foodTimerSystem,
     playerFoodCollision,
     updatePlayerPointsSystem,
-    moveEatableSystems
+    moveEatableSystems,
+    speedSystem
   ];
 
   const requiredComponentsAreInUse = (dependencies: componentTypes[]) => {

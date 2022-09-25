@@ -11,6 +11,7 @@ import scoreComponent from "./ECS/components/scoreComponent";
 import textComponent from "./ECS/components/textComponent";
 import gameRunningComponent, {IGameRunningComponent} from "./ECS/components/gameRunningComponent";
 import componentTypes from "./ECS/componentTypes";
+import speedComponent from "./ECS/components/speedComponent";
 
 const app = new PIXI.Application({ width: appWidth, height: appHeight });
 
@@ -23,6 +24,7 @@ playerEntity.addComponent(graphicsComponent({
 }));
 playerEntity.addComponent(playerMovableComponent());
 playerEntity.addComponent(scoreComponent());
+playerEntity.addComponent(speedComponent());
 
 const scoreEntity = entityManager.createEntity();
 scoreEntity.addComponent(textComponent({

@@ -5,7 +5,8 @@ enum componentTypes {
   EATABLE = 'EATABLE',
   SCORE = 'SCORE',
   TEXT = 'TEXT',
-  GAME_RUNNING = 'GAME_RUNNING'
+  GAME_RUNNING = 'GAME_RUNNING',
+  SPEED = 'SPEED'
 }
 
 export default componentTypes;
