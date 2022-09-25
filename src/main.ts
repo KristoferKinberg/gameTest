@@ -31,6 +31,14 @@ scoreEntity.addComponent(textComponent({
   x: 275
 }));
 
+const gameOverEntity = entityManager.createEntity();
+gameOverEntity.addComponent(textComponent({
+  text: 'GAME OVER',
+  id: 'gameOver',
+  stage: app.stage,
+  x: appWidth-(appWidth/2),
+}));
+
 const gameEntity = entityManager.createEntity();
 gameEntity.addComponent(foodTimerComponent());
 

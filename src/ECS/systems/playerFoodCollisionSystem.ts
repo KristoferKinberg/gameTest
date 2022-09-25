@@ -17,8 +17,13 @@ const playerFoodCollisionSystem = ({ entities }: ISystemParams) =>
     entitiesWithEatableComponent
       .forEach((eatable: any) => {
         const { isMounted, getGraphicsObject } = eatable.getComponent(componentTypes.GRAPHICS);
+        const eatableGraphics = getGraphicsObject();
 
-        if (isMounted() && didCollide(getGraphicsObject(), playerGraphics)) {
+        if (isMounted() && didCollide(eatableGraphics, playerGraphics)) {
+          const playerIsBigger = playerGraphics.width > eatableGraphics.width;
+
+          console.log(playerIsBigger);
+
           const scoreComponent = entity.getComponent(componentTypes.SCORE);
           getGraphicsObject().destroy();
 
