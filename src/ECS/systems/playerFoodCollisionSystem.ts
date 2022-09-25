@@ -12,6 +12,8 @@ const playerFoodCollisionSystem = ({ entities }: ISystemParams) =>
     const playerGraphics = entity.getComponent(componentTypes.GRAPHICS).getGraphicsObject();
     const entitiesWithEatableComponent = entityManager.getEntitiesByComponents([componentTypes.EATABLE]);
 
+    const playEatSound = () => new Audio('../../../sounds/onEat.wav').play();
+
     entitiesWithEatableComponent
       .forEach((eatable: any) => {
         const { isMounted, getGraphicsObject } = eatable.getComponent(componentTypes.GRAPHICS);
@@ -21,6 +23,7 @@ const playerFoodCollisionSystem = ({ entities }: ISystemParams) =>
           getGraphicsObject().destroy();
 
           scoreComponent.setScore(scoreComponent.getScore() + 1);
+          playEatSound();
           eatable.destroy();
         }
       });
