@@ -4,9 +4,11 @@ import foodGeneratorSystem from "./foodGeneratorSystem";
 import foodTimerSystem from "./foodTimerSystem";
 import playerFoodCollision from "./playerFoodCollisionSystem";
 import updatePlayerPointsSystem from "./updatePlayerPointsSystem";
+import moveEatableSystems from "./moveEatableSystem";
 import componentTypes from "../componentTypes";
-import EntityManager, {IEntity} from "../entity/entityManager";
+import EntityManager from "../entity/entityManager";
 import * as PIXI from 'pixi.js'
+import {IEntity} from "../entity/entityGenerator";
 
 export interface ISystemParams {
   entities: IEntity[],
@@ -29,6 +31,7 @@ export const systemsManager = () => {
     foodTimerSystem,
     playerFoodCollision,
     updatePlayerPointsSystem,
+    moveEatableSystems
   ];
 
   const requiredComponentsAreInUse = (dependencies: componentTypes[]) => {

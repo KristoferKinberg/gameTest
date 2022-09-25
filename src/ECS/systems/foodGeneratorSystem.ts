@@ -1,5 +1,5 @@
 import componentTypes from "../componentTypes";
-import {appHeight, appWidth} from "../../constants";
+import {appWidth, foodMaxR} from "../../constants";
 import entityManager from "../entity/entityManager";
 import eatableComponent from "../components/eatableComponent";
 import graphicsComponent from "../components/graphicsComponent";
@@ -8,13 +8,14 @@ import {ISystemParams} from "./index";
 const foodGeneratorSystem = ({entities}: ISystemParams) =>
   entities.forEach(({ getComponent }: any) => {
     const component = getComponent(componentTypes.FOOD_TIMER);
+    const r = Math.floor(Math.random() * foodMaxR);
 
     /**
      * Generate random components for food
      */
     const getRandomCoordinates = () => ({
       y: Math.floor(Math.random() * appWidth),
-      x: Math.floor(Math.random() * appHeight)
+      x: -r,
     });
 
     if (component && component.getShouldGenerate()) {
@@ -22,7 +23,7 @@ const foodGeneratorSystem = ({entities}: ISystemParams) =>
       const {x, y} = getRandomCoordinates();
 
       foodEntity.addComponent(eatableComponent());
-      foodEntity.addComponent(graphicsComponent(x, y, 10, 0xff0000));
+      foodEntity.addComponent(graphicsComponent(x, y, r, 0xff0000));
     }
   });
 
