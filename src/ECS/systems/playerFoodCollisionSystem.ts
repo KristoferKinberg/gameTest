@@ -5,6 +5,7 @@ import didCollide from "../../utils/collision";
 import {ISystemParams} from "./index";
 import textComponent from "../components/textComponent";
 import {appHeight, appWidth} from "../../constants";
+import {IGameRunningComponent} from "../components/gameRunningComponent";
 
 const playerFoodCollisionSystem = ({ entities, app }: ISystemParams) =>
   entities.forEach((entity: any) => {
@@ -48,18 +49,18 @@ const playerFoodCollisionSystem = ({ entities, app }: ISystemParams) =>
               }
             }));
 
-            const gameRunningsComponent = EntityManager
-              .getEntityByComponent(componentTypes.GAME_RUNNING)
-              .getComponent(componentTypes.GAME_RUNNING);
-            gameRunningsComponent.setRunning(false);
-            return;
+            const gameEntity = EntityManager.getEntityByComponent(componentTypes.GAME_RUNNING);
+            if (!gameEntity) return;
+            const gameRunningComponent = gameEntity.getComponent<IGameRunningComponent>(componentTypes.GAME_RUNNING);
+
+            gameRunningComponent && gameRunningComponent.setRunning(false);
           }
 
           const scoreComponent = entity.getComponent(componentTypes.SCORE);
           getGraphicsObject().destroy();
           resizePlayerGraphics();
           scoreComponent.setScore(scoreComponent.getScore() + 1);
-          //playEatSound();
+          playEatSound();
           eatable.destroy();
         }
       });

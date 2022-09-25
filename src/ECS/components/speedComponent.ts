@@ -8,13 +8,13 @@ export interface ISpeedObject {
 }
 
 export type ISpeedMap = {
-  [key in keyof typeof KEYS]: ISpeedObject;
+  [key: keyof KEYS]: ISpeedObject;
 };
 
 export interface ISpeedComponent extends IRootComponent {
   setDirectionSpeed(direction: keyof typeof KEYS, speed: number): void;
   getSpeedMap(): ISpeedMap;
-  getOppositeDirection(): keyof typeof KEYS;
+  getOppositeDirection(key: keyof typeof KEYS): keyof typeof KEYS;
 }
 
 const SpeedComponent = (): ISpeedComponent => {

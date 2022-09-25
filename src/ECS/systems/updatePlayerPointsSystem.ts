@@ -10,8 +10,7 @@ const updatePlayerPointsSystem = () => {
     .forEach(({ components }) => {
       return components.forEach((component: any) => {
         if (component.getId() === 'scoreValue' && playerEntity) {
-          const scoreComponent: (IScoreComponent | undefined) = playerEntity.components
-            .find(({ getName }: any) => getName() === componentTypes.SCORE);
+          const scoreComponent: (IScoreComponent | undefined) = playerEntity.getComponent(componentTypes.SCORE)
 
           if (scoreComponent) component.setText(scoreComponent.getScore())
         }

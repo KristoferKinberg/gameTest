@@ -2,13 +2,16 @@ import componentTypes from "../componentTypes";
 import {ISystemParams} from "./index";
 import EntityManager from "../entity/entityManager";
 import keyMap, {KEYS} from "../../keymap";
+import {ISpeedComponent} from "../components/speedComponent";
 
 let timePassedSinceSpeedChange = 0;
 
 const speedSystem = ({ secondsPassed }: ISystemParams) => {
-  const speedComponent = EntityManager
-    .getEntityByComponent(componentTypes.PLAYER_MOVABLE)
-    .getComponent(componentTypes.SPEED);
+  const playerEntity = EntityManager.getEntityByComponent(componentTypes.PLAYER_MOVABLE);
+  if (!playerEntity) return;
+
+  const speedComponent = playerEntity.getComponent<ISpeedComponent>(componentTypes.SPEED);
+  if (!speedComponent) return;
 
   const acceleration = 0.2;
   const maxSpeed = 4;
