@@ -23,7 +23,16 @@ const foodGeneratorSystem = ({entities}: ISystemParams) =>
       const {x, y} = getRandomCoordinates();
 
       foodEntity.addComponent(eatableComponent());
-      foodEntity.addComponent(graphicsComponent(x, y, r, 0xff0000));
+      foodEntity.addComponent(graphicsComponent({
+        x,
+        y,
+        r,
+        color: 0xff0000,
+        border: {
+          color: 0x00ffff,
+          thickness: 10,
+        }
+      }));
     }
   });
 
