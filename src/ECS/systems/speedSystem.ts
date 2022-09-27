@@ -13,7 +13,7 @@ const speedSystem = ({ secondsPassed }: ISystemParams) => {
   const speedComponent = playerEntity.getComponent<ISpeedComponent>(componentTypes.SPEED);
   if (!speedComponent) return;
 
-  const acceleration = 0.2;
+  const acceleration = 0.4;
   const maxSpeed = 4;
   const speedMapCopy = speedComponent.getSpeedMap();
 
