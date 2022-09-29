@@ -6,7 +6,7 @@ const foodTimerSystem = ({ entities }: ISystemParams) =>
     const component = getComponent(componentTypes.FOOD_TIMER);
 
     if (component) {
-      if (component.getFoodTimer() === 50) {
+      if (component.getFoodTimer() === 10) {
         component.setFoodTimer(0);
         return component.setShouldGenerate(true);
       }

@@ -1,4 +1,4 @@
-import keyMap from "../../keymap";
+import {KEYS} from "../../keymap";
 import {appHeight, appWidth} from "../../constants";
 import * as PIXI from 'pixi.js'
 import componentTypes from "../componentTypes";
@@ -25,30 +25,30 @@ const handleUserInputSystem = ({ entities }: ISystemParams) => {
     return (xPosition + playerObj.width + 3) > appWidth;
   }
 
-  const handleInput = (playerObj: PIXI.Graphics) => {
+  const handleInput = (playerObj: PIXI.Graphics, speedMap: any) => {
     // if (keyMap.Escape) stop = true;
 
-    if (keyMap.ArrowUp && !isTopEdgeOfScreen(playerObj))
-      playerObj.position.y = playerObj.getGlobalPosition().y - 2;
+    if (speedMap[KEYS.ARROW_UP].speed && !isTopEdgeOfScreen(playerObj))
+      playerObj.position.y = playerObj.getGlobalPosition().y - speedMap[KEYS.ARROW_UP].speed;
 
-    if (keyMap.ArrowDown && !isBottomEdgeOfScreen(playerObj))
-      playerObj.position.y = playerObj.getGlobalPosition().y + 2;
+    if (speedMap[KEYS.ARROW_DOWN].speed && !isBottomEdgeOfScreen(playerObj))
+      playerObj.position.y = playerObj.getGlobalPosition().y + speedMap[KEYS.ARROW_DOWN].speed;
 
-    if (keyMap.ArrowLeft && !isLeftEdgeOfScreen(playerObj))
-      playerObj.position.x = playerObj.getGlobalPosition().x - 2;
+    if (speedMap[KEYS.ARROW_LEFT].speed && !isLeftEdgeOfScreen(playerObj))
+      playerObj.position.x = playerObj.getGlobalPosition().x - speedMap[KEYS.ARROW_LEFT].speed;
 
-    if (keyMap.ArrowRight && !isRightEdgeOfScreen(playerObj))
-      playerObj.position.x = playerObj.getGlobalPosition().x + 2;
+    if (speedMap[KEYS.ARROW_RIGHT].speed && !isRightEdgeOfScreen(playerObj))
+      playerObj.position.x = playerObj.getGlobalPosition().x + speedMap[KEYS.ARROW_RIGHT].speed;
   };
 
   return entities
     .forEach(({ getComponent }: any) => {
       const isPLayerMovable = getComponent(componentTypes.PLAYER_MOVABLE);
       const graphicsComponent = getComponent(componentTypes.GRAPHICS);
+      const speedComponent = getComponent(componentTypes.SPEED);
 
       if (isPLayerMovable && graphicsComponent) {
-
-        handleInput(graphicsComponent.getGraphicsObject())
+        handleInput(graphicsComponent.getGraphicsObject(), speedComponent.getSpeedMap());
       }
     });
 }
