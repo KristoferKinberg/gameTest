@@ -1,7 +1,7 @@
 import entityManager from "../entity/entityManager";
 import EntityManager from "../entity/entityManager";
 import componentTypes from "../componentTypes";
-import didCollide from "../../utils/collision";
+import { didCollide } from "../../utils/rectangleCollision";
 import {ISystemParams} from "./index";
 import textComponent from "../components/textComponent";
 import {appHeight, appWidth} from "../../constants";
@@ -20,11 +20,12 @@ const playerFoodCollisionSystem = ({ entities, app }: ISystemParams) =>
     const playEatSound = () => new Audio('../../../sounds/onEat.wav').play();
 
     const resizePlayerGraphics = () => {
-      const previousRadius = playerGraphicsObject.width / 2;
+      const previousWidth = playerGraphicsObject.width;
+      const previousHeight = playerGraphicsObject.height;
 
       playerGraphicsObject.clear();
       playerGraphicsObject.beginFill(0xffffff);
-      playerGraphicsObject.drawCircle(0, 0, previousRadius + 2);
+      playerGraphicsObject.drawRect(0, 0, previousWidth + 2, previousHeight  + 1);
       playerGraphicsObject.endFill();
     };
 
@@ -60,7 +61,7 @@ const playerFoodCollisionSystem = ({ entities, app }: ISystemParams) =>
           getGraphicsObject().destroy();
           resizePlayerGraphics();
           scoreComponent.setScore(scoreComponent.getScore() + 1);
-          playEatSound();
+          //playEatSound();
           eatable.destroy();
         }
       });

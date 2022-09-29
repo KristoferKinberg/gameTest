@@ -1,7 +1,7 @@
 import './style.css'
 import * as PIXI from 'pixi.js'
 import entityManager from "./ECS/entity/entityManager";
-import graphicsComponent from "./ECS/components/graphicsComponent";
+import graphicsComponent, {SupportedShapes} from "./ECS/components/graphicsComponent";
 import playerMovableComponent from "./ECS/components/playerMoveableComponent";
 import keyMap from "./keymap";
 import {appHeight, appWidth} from "./constants";
@@ -12,19 +12,57 @@ import textComponent from "./ECS/components/textComponent";
 import gameRunningComponent, {IGameRunningComponent} from "./ECS/components/gameRunningComponent";
 import componentTypes from "./ECS/componentTypes";
 import speedComponent from "./ECS/components/speedComponent";
+//import {generateSprite, TILE_TYPES} from "./utils/tileMap";
+import buildBoard from "./utils/buildBoard";
+import spriteComponent from "./ECS/components/spriteComponent";
+import {TILE_TYPES} from "./utils/tileMap";
 
 const app = new PIXI.Application({ width: appWidth, height: appHeight });
+//console.log(PIXI.Assets.load('/assets/tileSheet.png'));
 
-const playerEntity = entityManager.createEntity();
-const r = 30;
-playerEntity.addComponent(graphicsComponent({
-  x: (appWidth / 2) - r,
-  y: (appHeight / 2) - r,
-  r,
-}));
-playerEntity.addComponent(playerMovableComponent());
-playerEntity.addComponent(scoreComponent());
-playerEntity.addComponent(speedComponent());
+buildBoard(app);
+
+/**setTimeout(() => {
+  const tx = 100;
+  const ty = 100;
+  const tw = 400;
+  const th = tw/2;
+
+  const sprite = generateSprite(TILE_TYPES.ORANGE_LARGE);
+  sprite.x = tx;
+  sprite.y = ty;
+  sprite.width = tw;
+  sprite.height = th;
+
+  const _gr  = new PIXI.Graphics();
+  _gr.beginFill(0xff00ff);
+  _gr.drawRect(tx, ty, tw, th);
+  _gr.endFill();
+
+  app.stage.addChild(_gr, sprite);
+}, 200)*/
+/**playerEntity.addComponent(graphicsComponent({
+  x: (appWidth / 2) - 20,
+  y: (appHeight / 2) - 10,
+  shape: SupportedShapes.RECTANGLE,
+  color: 0xff0000
+}));*/
+
+setTimeout(() => {
+  const playerWidth = 40;
+  const playerEntity = entityManager.createEntity();
+
+  playerEntity.addComponent(spriteComponent({
+    x: (appWidth / 2) - 20,
+    y: (appHeight / 2) - 10,
+    width: playerWidth,
+    height: playerWidth / 2,
+    type: TILE_TYPES.RED_LARGE,
+  }))
+  playerEntity.addComponent(playerMovableComponent());
+  playerEntity.addComponent(scoreComponent());
+  playerEntity.addComponent(speedComponent());
+}, 200);
 
 const scoreEntity = entityManager.createEntity();
 scoreEntity.addComponent(textComponent({
@@ -73,4 +111,6 @@ const gameLoop = (timeStamp: any) => {
   window.requestAnimationFrame(gameLoop);
 }
 
-window.requestAnimationFrame(gameLoop);
+setTimeout(() => {
+  window.requestAnimationFrame(gameLoop);
+}, 200)

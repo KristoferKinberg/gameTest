@@ -11,7 +11,7 @@ const moveEatableSystems = ({ secondsPassed }: ISystemParams) => {
     const grahpicsComponent = entity.getComponent<IGraphicsComponent>(componentTypes.GRAPHICS);
     // @ts-ignore
     const graphicsObject = grahpicsComponent.getGraphicsObject();
-    const xValue = (foodMaxR - (graphicsObject.width / 2)) / 15;
+    const xValue = (foodMaxR - (graphicsObject.width / 2)) / 25;
     const newXPosition = (graphicsObject.position.x + xValue);
 
     const shouldDestroy = (newXPosition - graphicsObject.width) > appWidth;
