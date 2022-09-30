@@ -1,8 +1,10 @@
-import {KEYS} from "../../keymap";
+import keyMap, {KEYS} from "../../keymap";
 import {appHeight, appWidth} from "../../constants";
 import * as PIXI from 'pixi.js'
 import componentTypes from "../componentTypes";
 import {ISystemParams} from "./index";
+import {Direction, IDirectioncomponent} from "../components/directionComponent";
+import {IGraphicsComponent} from "../components/graphicsComponent";
 
 const handleUserInputSystem = ({ entities }: ISystemParams) => {
   const isTopEdgeOfScreen = (playerObj: PIXI.Graphics) => {
@@ -23,6 +25,20 @@ const handleUserInputSystem = ({ entities }: ISystemParams) => {
   const isRightEdgeOfScreen = (playerObj: PIXI.Graphics) => {
     const xPosition = playerObj.getBounds().x;
     return (xPosition + playerObj.width + 3) > appWidth;
+  }
+
+  const handleDirection = (directionComponent: IDirectioncomponent, graphicsComponent: IGraphicsComponent) => {
+    const direction = directionComponent.getDirection();
+    if (keyMap.ArrowLeft && direction !== Direction.LEFT) {
+      console.log('ran');
+      directionComponent.setDirection(Direction.LEFT);
+      graphicsComponent.getGraphicsObject().scale.x *= -1;
+    }
+    if (keyMap.ArrowRight && direction !== Direction.RIGHT) {
+      directionComponent.setDirection(Direction.RIGHT);
+      graphicsComponent.getGraphicsObject().scale.x *= -1;
+    }
+
   }
 
   const handleInput = (playerObj: PIXI.Graphics, speedMap: any) => {
@@ -46,8 +62,10 @@ const handleUserInputSystem = ({ entities }: ISystemParams) => {
       const isPLayerMovable = getComponent(componentTypes.PLAYER_MOVABLE);
       const graphicsComponent = getComponent(componentTypes.SPRITE);
       const speedComponent = getComponent(componentTypes.SPEED);
+      const directionComponent = getComponent(componentTypes.DIRECTION);
 
-      if (isPLayerMovable && graphicsComponent) {
+      if (isPLayerMovable && graphicsComponent && directionComponent) {
+        handleDirection(directionComponent, graphicsComponent);
         handleInput(graphicsComponent.getGraphicsObject(), speedComponent.getSpeedMap());
       }
     });

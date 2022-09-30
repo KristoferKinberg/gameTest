@@ -1,7 +1,6 @@
 import './style.css'
 import * as PIXI from 'pixi.js'
 import entityManager from "./ECS/entity/entityManager";
-import graphicsComponent, {SupportedShapes} from "./ECS/components/graphicsComponent";
 import playerMovableComponent from "./ECS/components/playerMoveableComponent";
 import keyMap from "./keymap";
 import {appHeight, appWidth} from "./constants";
@@ -16,6 +15,7 @@ import speedComponent from "./ECS/components/speedComponent";
 import buildBoard from "./utils/buildBoard";
 import spriteComponent from "./ECS/components/spriteComponent";
 import {TILE_TYPES} from "./utils/tileMap";
+import directionComponent, {Direction} from "./ECS/components/directionComponent";
 
 const app = new PIXI.Application({ width: appWidth, height: appHeight });
 //console.log(PIXI.Assets.load('/assets/tileSheet.png'));
@@ -36,6 +36,7 @@ setTimeout(() => {
   playerEntity.addComponent(playerMovableComponent());
   playerEntity.addComponent(scoreComponent());
   playerEntity.addComponent(speedComponent());
+  playerEntity.addComponent(directionComponent(Direction.RIGHT));
 }, 200);
 
 const scoreEntity = entityManager.createEntity();

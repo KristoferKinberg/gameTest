@@ -5,19 +5,19 @@ import eatableComponent from "../components/eatableComponent";
 import {ISystemParams} from "./index";
 import {TILE_TYPES} from "../../utils/tileMap";
 import spriteComponent from "../components/spriteComponent";
+import directionComponent, {Direction} from "../components/directionComponent";
 
 const foodGeneratorSystem = ({entities}: ISystemParams) =>
   entities.forEach(({ getComponent }: any) => {
     const component = getComponent(componentTypes.FOOD_TIMER);
     const width = Math.floor(Math.random() * foodMaxR);
-
+    const direction = Boolean(Math.floor(Math.random() * 2))
+      ? Direction.LEFT
+      : Direction.RIGHT;
     /**
      * Generate random components for food
      */
-    const getRandomCoordinates = () => ({
-      y: Math.floor(Math.random() * appWidth),
-      x: -width,
-    });
+    const getRandomYCoordinate = () => Math.floor(Math.random() * appWidth);
 
     const fishTypes = [
       TILE_TYPES.GREEN_SMALL,
@@ -32,16 +32,24 @@ const foodGeneratorSystem = ({entities}: ISystemParams) =>
 
     if (component && component.getShouldGenerate()) {
       const foodEntity = entityManager.createEntity();
-      const {x, y} = getRandomCoordinates();
 
       foodEntity.addComponent(eatableComponent());
+      foodEntity.addComponent(directionComponent(direction));
       foodEntity.addComponent(spriteComponent({
-        x,
-        y,
+        x: direction === Direction.LEFT
+          ? -width
+          : appWidth + width,
+        y: getRandomYCoordinate(),
         width,
         height: width / 2,
         type: fishTypes[Math.floor(Math.random() * 5)],
       }));
+
+      if (direction === Direction.RIGHT) {
+        // @ts-ignore
+        const sprite = foodEntity.getComponent(componentTypes.SPRITE).getGraphicsObject();
+        sprite.scale.x *= -1
+      }
     }
   });
 

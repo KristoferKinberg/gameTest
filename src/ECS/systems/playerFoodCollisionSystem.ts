@@ -22,11 +22,6 @@ const playerFoodCollisionSystem = ({ entities, app }: ISystemParams) =>
     const resizePlayerGraphics = () => {
       playerGraphicsObject.width = playerGraphicsObject.width + 5;
       playerGraphicsObject.height = playerGraphicsObject.height + 5;
-
-      //playerGraphicsObject.clear();
-      //playerGraphicsObject.beginFill(0xffffff);
-      //playerGraphicsObject.drawRect(0, 0, previousWidth + 2, previousHeight  + 1);
-      //playerGraphicsObject.endFill();
     };
 
     entitiesWithEatableComponent

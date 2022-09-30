@@ -7,7 +7,8 @@ enum componentTypes {
   SCORE = 'SCORE',
   TEXT = 'TEXT',
   GAME_RUNNING = 'GAME_RUNNING',
-  SPEED = 'SPEED'
+  SPEED = 'SPEED',
+  DIRECTION = 'DIRECTION'
 }
 
 export default componentTypes;
