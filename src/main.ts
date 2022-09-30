@@ -22,32 +22,6 @@ const app = new PIXI.Application({ width: appWidth, height: appHeight });
 
 buildBoard(app);
 
-/**setTimeout(() => {
-  const tx = 100;
-  const ty = 100;
-  const tw = 400;
-  const th = tw/2;
-
-  const sprite = generateSprite(TILE_TYPES.ORANGE_LARGE);
-  sprite.x = tx;
-  sprite.y = ty;
-  sprite.width = tw;
-  sprite.height = th;
-
-  const _gr  = new PIXI.Graphics();
-  _gr.beginFill(0xff00ff);
-  _gr.drawRect(tx, ty, tw, th);
-  _gr.endFill();
-
-  app.stage.addChild(_gr, sprite);
-}, 200)*/
-/**playerEntity.addComponent(graphicsComponent({
-  x: (appWidth / 2) - 20,
-  y: (appHeight / 2) - 10,
-  shape: SupportedShapes.RECTANGLE,
-  color: 0xff0000
-}));*/
-
 setTimeout(() => {
   const playerWidth = 40;
   const playerEntity = entityManager.createEntity();

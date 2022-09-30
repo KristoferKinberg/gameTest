@@ -10,7 +10,7 @@ interface IProps {
 }
 
 const spriteComponent = ({ x, y, type, width, height }: IProps) => {
-  const _name = componentTypes.GRAPHICS;
+  const _name = componentTypes.SPRITE;
   const _gr  = generateSprite(type);
   let _mounted = false;
 

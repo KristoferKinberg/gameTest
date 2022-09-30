@@ -13,25 +13,25 @@ const playerFoodCollisionSystem = ({ entities, app }: ISystemParams) =>
 
     if (!isPLayerMovable) return;
 
-    const playerGraphicsComponent = entity.getComponent(componentTypes.GRAPHICS);
+    const playerGraphicsComponent = entity.getComponent(componentTypes.SPRITE);
     const playerGraphicsObject = playerGraphicsComponent.getGraphicsObject();
     const entitiesWithEatableComponent = entityManager.getEntitiesByComponents([componentTypes.EATABLE]);
 
     const playEatSound = () => new Audio('../../../sounds/onEat.wav').play();
 
     const resizePlayerGraphics = () => {
-      const previousWidth = playerGraphicsObject.width;
-      const previousHeight = playerGraphicsObject.height;
+      playerGraphicsObject.width = playerGraphicsObject.width + 5;
+      playerGraphicsObject.height = playerGraphicsObject.height + 5;
 
-      playerGraphicsObject.clear();
-      playerGraphicsObject.beginFill(0xffffff);
-      playerGraphicsObject.drawRect(0, 0, previousWidth + 2, previousHeight  + 1);
-      playerGraphicsObject.endFill();
+      //playerGraphicsObject.clear();
+      //playerGraphicsObject.beginFill(0xffffff);
+      //playerGraphicsObject.drawRect(0, 0, previousWidth + 2, previousHeight  + 1);
+      //playerGraphicsObject.endFill();
     };
 
     entitiesWithEatableComponent
       .forEach((eatable: any) => {
-        const { isMounted, getGraphicsObject } = eatable.getComponent(componentTypes.GRAPHICS);
+        const { isMounted, getGraphicsObject } = eatable.getComponent(componentTypes.SPRITE);
         const eatableGraphics = getGraphicsObject();
 
         if (isMounted() && didCollide(eatableGraphics, playerGraphicsObject)) {

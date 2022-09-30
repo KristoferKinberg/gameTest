@@ -44,7 +44,7 @@ const handleUserInputSystem = ({ entities }: ISystemParams) => {
   return entities
     .forEach(({ getComponent }: any) => {
       const isPLayerMovable = getComponent(componentTypes.PLAYER_MOVABLE);
-      const graphicsComponent = getComponent(componentTypes.GRAPHICS);
+      const graphicsComponent = getComponent(componentTypes.SPRITE);
       const speedComponent = getComponent(componentTypes.SPEED);
 
       if (isPLayerMovable && graphicsComponent) {
@@ -55,5 +55,5 @@ const handleUserInputSystem = ({ entities }: ISystemParams) => {
 
 export default {
   system: handleUserInputSystem,
-  dependencies: [componentTypes.PLAYER_MOVABLE, componentTypes.GRAPHICS],
+  dependencies: [componentTypes.PLAYER_MOVABLE, componentTypes.SPRITE],
 };

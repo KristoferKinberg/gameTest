@@ -3,7 +3,7 @@ import {ISystemParams} from "./index";
 
 const mountGraphicsSystem = ({ entities, app }: ISystemParams) =>
   entities.forEach(({ getComponent }: any) => {
-    const component = getComponent(componentTypes.GRAPHICS);
+    const component = getComponent(componentTypes.SPRITE);
 
     if (component && !component.isMounted()) {
       app.stage.addChild(component.getGraphicsObject());
@@ -13,5 +13,5 @@ const mountGraphicsSystem = ({ entities, app }: ISystemParams) =>
 
 export default {
   system: mountGraphicsSystem,
-  dependencies: [componentTypes.GRAPHICS]
+  dependencies: [componentTypes.SPRITE]
 };

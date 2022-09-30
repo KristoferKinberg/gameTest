@@ -38,7 +38,7 @@ interface IProps {
 }
 
 const graphicsComponent = (props?: IProps): IGraphicsComponent => {
-  const _name = componentTypes.GRAPHICS;
+  const _name = componentTypes.SPRITE;
   const _gr  = new PIXI.Graphics();
   const baseSettings = {
     x: 35,

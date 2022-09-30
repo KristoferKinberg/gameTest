@@ -8,7 +8,7 @@ const moveEatableSystems = ({ secondsPassed }: ISystemParams) => {
   const EatableEntities = EntityManager.getEntitiesByComponents([componentTypes.EATABLE]);
 
   EatableEntities.forEach((entity) => {
-    const grahpicsComponent = entity.getComponent<IGraphicsComponent>(componentTypes.GRAPHICS);
+    const grahpicsComponent = entity.getComponent<IGraphicsComponent>(componentTypes.SPRITE);
     // @ts-ignore
     const graphicsObject = grahpicsComponent.getGraphicsObject();
     const xValue = (foodMaxR - (graphicsObject.width / 2)) / 25;
