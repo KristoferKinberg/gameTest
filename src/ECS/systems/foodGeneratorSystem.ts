@@ -5,6 +5,7 @@ import eatableComponent from "../components/eatableComponent";
 import {ISystemParams} from "./index";
 import {TILE_TYPES} from "../../utils/tileMap";
 import spriteComponent from "../components/spriteComponent";
+import directionComponent from "../components/directionComponent";
 
 const foodGeneratorSystem = ({entities}: ISystemParams) =>
   entities.forEach(({ getComponent }: any) => {
@@ -35,6 +36,7 @@ const foodGeneratorSystem = ({entities}: ISystemParams) =>
       const {x, y} = getRandomCoordinates();
 
       foodEntity.addComponent(eatableComponent());
+      foodEntity.addComponent(directionComponent());
       foodEntity.addComponent(spriteComponent({
         x,
         y,
