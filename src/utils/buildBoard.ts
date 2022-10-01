@@ -17,7 +17,7 @@ export default (app: PIXI.Application) => setTimeout(() => {
   const rows = Math.round(appWidth / tileWidth);
   const columns = Math.round(appHeight / tileHeight);
 
-  for (let i = 0; i < rows; i++){
+  for (let i = 0; i < rows+1; i++){
     for (let j = 0; j < columns; j++){
       const oceanSprite = generateSprite(TILE_TYPES.OCEAN);
       oceanSprite.position.x = i * tileWidth;
@@ -25,7 +25,7 @@ export default (app: PIXI.Application) => setTimeout(() => {
       app.stage.addChild(oceanSprite);
     }
 
-    const floorSprite = generateSprite(floorTiles[i]);
+    const floorSprite = generateSprite(floorTiles[(i+1)%floorTiles.length]);
     floorSprite.zIndex = 1;
     floorSprite.position.x = i * tileWidth;
     floorSprite.position.y = appHeight - tileWidth;

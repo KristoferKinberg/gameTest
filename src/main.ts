@@ -31,7 +31,7 @@ setTimeout(() => {
     y: (appHeight / 2) - 10,
     width: playerWidth,
     height: playerWidth / 2,
-    type: TILE_TYPES.RED_LARGE,
+    type: TILE_TYPES.RED_SMALL,
   }))
   playerEntity.addComponent(playerMovableComponent());
   playerEntity.addComponent(scoreComponent());

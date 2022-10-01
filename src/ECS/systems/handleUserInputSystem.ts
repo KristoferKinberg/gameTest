@@ -29,14 +29,17 @@ const handleUserInputSystem = ({ entities }: ISystemParams) => {
 
   const handleDirection = (directionComponent: IDirectioncomponent, graphicsComponent: IGraphicsComponent) => {
     const direction = directionComponent.getDirection();
+    const graphicsObject = graphicsComponent.getGraphicsObject();
+
     if (keyMap.ArrowLeft && direction !== Direction.LEFT) {
-      console.log('ran');
       directionComponent.setDirection(Direction.LEFT);
-      graphicsComponent.getGraphicsObject().scale.x *= -1;
+      graphicsObject.scale.x *= -1;
+      graphicsObject.position.x = graphicsObject.position.x + graphicsObject.width;
     }
     if (keyMap.ArrowRight && direction !== Direction.RIGHT) {
       directionComponent.setDirection(Direction.RIGHT);
-      graphicsComponent.getGraphicsObject().scale.x *= -1;
+      graphicsObject.scale.x *= -1;
+      graphicsObject.position.x = graphicsObject.position.x - graphicsObject.width;
     }
 
   }
