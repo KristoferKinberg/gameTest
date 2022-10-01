@@ -21,7 +21,7 @@ const playerFoodCollisionSystem = ({ entities, app }: ISystemParams) =>
 
     const resizePlayerGraphics = () => {
       playerGraphicsObject.width = playerGraphicsObject.width + 5;
-      playerGraphicsObject.height = playerGraphicsObject.height + 5;
+      playerGraphicsObject.height = playerGraphicsObject.height + 2.5;
     };
 
     entitiesWithEatableComponent
@@ -49,7 +49,8 @@ const playerFoodCollisionSystem = ({ entities, app }: ISystemParams) =>
             if (!gameEntity) return;
             const gameRunningComponent = gameEntity.getComponent<IGameRunningComponent>(componentTypes.GAME_RUNNING);
 
-            gameRunningComponent && gameRunningComponent.setRunning(false);
+            entity.destroy();
+            return gameRunningComponent && gameRunningComponent.setRunning(false);
           }
 
           const scoreComponent = entity.getComponent(componentTypes.SCORE);
