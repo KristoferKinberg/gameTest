@@ -14,10 +14,15 @@ import speedComponent from "./ECS/components/speedComponent";
 //import {generateSprite, TILE_TYPES} from "./utils/tileMap";
 import buildBoard from "./utils/buildBoard";
 import spriteComponent from "./ECS/components/spriteComponent";
-import {TILE_TYPES} from "./utils/tileMap";
+import {generateSprite, TILE_TYPES} from "./utils/tileMap";
 import directionComponent, {Direction} from "./ECS/components/directionComponent";
 
 const app = new PIXI.Application({ width: appWidth, height: appHeight });
+
+setTimeout(() => {
+  const weedSprite = generateSprite(TILE_TYPES.WEED_13);
+  app.stage.addChild(weedSprite);
+}, 50)
 
 buildBoard(app);
 setTimeout(() => {
@@ -30,7 +35,7 @@ setTimeout(() => {
     width: playerWidth,
     height: playerWidth / 2,
     type: TILE_TYPES.RED_SMALL,
-  }))
+  }));
   playerEntity.addComponent(playerMovableComponent());
   playerEntity.addComponent(scoreComponent());
   playerEntity.addComponent(speedComponent());
