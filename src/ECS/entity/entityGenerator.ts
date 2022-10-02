@@ -7,8 +7,9 @@ export interface IEntity {
   id: string;
   components: IComponent[];
   getComponent<Component>(componentType: componentTypes): Component | undefined;
-  addComponent(component: IComponent): number;
+  addComponent<Component>(component: IComponent): Component;
   removeComponent(componentName: componentTypes): void;
+  removeComponents(...componentsNames: componentTypes[]): void;
   hasComponent(componentName: componentTypes): boolean;
   destroy(): void;
 }
@@ -17,10 +18,17 @@ const entityGenerator = (): IEntity => {
   const id = uuidv4();
   let components: IComponent[] = [];
 
-  const addComponent = (component: IComponent) => components.push(component)
+  const addComponent = (component: Component) => {
+    components.push(component);
+    return component;
+  }
 
   const removeComponent = (componentName: componentTypes) => {
     components = components.filter(({ getName }) => getName() !== componentName)
+  }
+
+  const removeComponents = (...componentsTypes: componentTypes[]) => {
+    componentsTypes.forEach(removeComponent);
   }
 
   const getComponent = (componentName: componentTypes) =>
@@ -39,6 +47,7 @@ const entityGenerator = (): IEntity => {
     getComponent,
     hasComponent,
     destroy,
+    removeComponents,
   }
 };
 

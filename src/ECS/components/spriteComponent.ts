@@ -12,9 +12,12 @@ interface IProps {
 const spriteComponent = ({ x, y, type, width, height }: IProps) => {
   const _name = componentTypes.SPRITE;
   const _gr  = generateSprite(type);
+  const _type = type;
   let _mounted = false;
 
   const getName = () => _name;
+
+  const getType = () => _type;
 
   const getGraphicsObject = () => _gr;
 
@@ -38,6 +41,7 @@ const spriteComponent = ({ x, y, type, width, height }: IProps) => {
 
   return {
     getName,
+    getType,
     getGraphicsObject,
     setPosition,
     getPosition,
@@ -45,5 +49,7 @@ const spriteComponent = ({ x, y, type, width, height }: IProps) => {
     setMounted,
   }
 }
+
+export type ISpriteComponent = ReturnType<typeof spriteComponent>;
 
 export default spriteComponent;

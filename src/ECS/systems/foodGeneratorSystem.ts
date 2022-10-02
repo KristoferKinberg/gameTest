@@ -6,6 +6,7 @@ import {ISystemParams} from "./index";
 import {TILE_TYPES} from "../../utils/tileMap";
 import spriteComponent from "../components/spriteComponent";
 import directionComponent, {Direction} from "../components/directionComponent";
+import aliveComponent from "../components/aliveComponent";
 
 const foodGeneratorSystem = ({entities}: ISystemParams) =>
   entities.forEach(({ getComponent }: any) => {
@@ -35,6 +36,7 @@ const foodGeneratorSystem = ({entities}: ISystemParams) =>
 
       foodEntity.addComponent(eatableComponent());
       foodEntity.addComponent(directionComponent(direction));
+      foodEntity.addComponent(aliveComponent());
       foodEntity.addComponent(spriteComponent({
         x: direction === Direction.LEFT
           ? -width
@@ -42,7 +44,7 @@ const foodGeneratorSystem = ({entities}: ISystemParams) =>
         y: getRandomYCoordinate(),
         width,
         height: width / 2,
-        type: fishTypes[Math.floor(Math.random() * 5)],
+        type: fishTypes[Math.floor(Math.random() * fishTypes.length)],
       }));
 
       if (direction === Direction.RIGHT) {

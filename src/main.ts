@@ -18,10 +18,8 @@ import {TILE_TYPES} from "./utils/tileMap";
 import directionComponent, {Direction} from "./ECS/components/directionComponent";
 
 const app = new PIXI.Application({ width: appWidth, height: appHeight });
-//console.log(PIXI.Assets.load('/assets/tileSheet.png'));
 
 buildBoard(app);
-
 setTimeout(() => {
   const playerWidth = 40;
   const playerEntity = entityManager.createEntity();
