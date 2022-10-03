@@ -9,7 +9,8 @@ enum componentTypes {
   GAME_RUNNING = 'GAME_RUNNING',
   SPEED = 'SPEED',
   DIRECTION = 'DIRECTION',
-  IS_ALIVE = 'IS_ALIVE'
+  IS_ALIVE = 'IS_ALIVE',
+  TIMER = 'TIMER'
 }
 
 export default componentTypes;

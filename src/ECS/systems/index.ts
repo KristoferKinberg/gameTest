@@ -10,6 +10,8 @@ import EntityManager from "../entity/entityManager";
 import * as PIXI from 'pixi.js'
 import {IEntity} from "../entity/entityGenerator";
 import speedSystem from "./speedSystem";
+import timerSystem from "./bubbleGeneratorSystem";
+import bubbleMoverSystem from "./bubbleMoverSystem";
 
 export interface ISystemParams {
   entities: IEntity[],
@@ -33,7 +35,9 @@ export const systemsManager = () => {
     playerFoodCollision,
     updatePlayerPointsSystem,
     moveEatableSystems,
-    speedSystem
+    speedSystem,
+    timerSystem,
+    bubbleMoverSystem
   ];
 
   const requiredComponentsAreInUse = (dependencies: componentTypes[]) => {

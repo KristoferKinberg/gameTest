@@ -3,7 +3,7 @@ import {appHeight, appWidth} from "../../constants";
 import * as PIXI from 'pixi.js'
 import componentTypes from "../componentTypes";
 import {ISystemParams} from "./index";
-import {Direction, IDirectioncomponent} from "../components/directionComponent";
+import {Direction, IDirectionComponent} from "../components/directionComponent";
 import {IGraphicsComponent} from "../components/graphicsComponent";
 
 const handleUserInputSystem = ({ entities }: ISystemParams) => {
@@ -27,7 +27,7 @@ const handleUserInputSystem = ({ entities }: ISystemParams) => {
     return (xPosition + playerObj.width + 3) > appWidth;
   }
 
-  const handleDirection = (directionComponent: IDirectioncomponent, graphicsComponent: IGraphicsComponent) => {
+  const handleDirection = (directionComponent: IDirectionComponent, graphicsComponent: IGraphicsComponent) => {
     const direction = directionComponent.getDirection();
     const graphicsObject = graphicsComponent.getGraphicsObject();
 

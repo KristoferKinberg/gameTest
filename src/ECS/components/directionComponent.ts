@@ -6,12 +6,12 @@ export enum Direction {
   RIGHT = 'RIGHT'
 }
 
-export interface IDirectioncomponent extends IRootComponent {
+export interface IDirectionComponent extends IRootComponent {
   getDirection: () => Direction;
   setDirection: (direction: Direction) => Direction;
 }
 
-const directionComponent = (direction = Direction.LEFT): IDirectioncomponent => {
+const directionComponent = (direction = Direction.LEFT): IDirectionComponent => {
   const _name = componentTypes.DIRECTION;
 
   let _direction = direction;

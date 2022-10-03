@@ -57,6 +57,7 @@ export enum TILE_TYPES {
   WEED_25 = "WEED_25",
   WEED_26 = "WEED_26",
   WEED_27 = "WEED_27",
+  BUBBLE = "BUBBLE",
 }
 
 const floorCords = {
@@ -120,10 +121,11 @@ export const tiles = {
 }
 
 export const generateSprite = (type: TILE_TYPES) => {
+  if (type === undefined) debugger;
+  if (type === TILE_TYPES.BUBBLE) return PIXI.Sprite.from('/assets/bubble.png');
+
   const texture = getTexture();
-
-  if (type === undefined) debugger
-
   texture.frame = new PIXI.Rectangle(...tiles[type]);
-  return new PIXI.Sprite(texture);
+
+  return new PIXI.Sprite(texture)
 }

@@ -16,6 +16,8 @@ import buildBoard from "./utils/buildBoard";
 import spriteComponent from "./ECS/components/spriteComponent";
 import {generateSprite, TILE_TYPES} from "./utils/tileMap";
 import directionComponent, {Direction} from "./ECS/components/directionComponent";
+import {timerComponent} from "./ECS/components/timerComponent";
+import {BUBBLE_TIMER_ID} from "./ECS/systems/bubbleGeneratorSystem";
 
 const app = new PIXI.Application({ width: appWidth, height: appHeight });
 
@@ -39,6 +41,7 @@ setTimeout(() => {
   playerEntity.addComponent(playerMovableComponent());
   playerEntity.addComponent(scoreComponent());
   playerEntity.addComponent(speedComponent());
+  playerEntity.addComponent(timerComponent({ timerId: BUBBLE_TIMER_ID, endTime: 2 }));
   playerEntity.addComponent(directionComponent(Direction.RIGHT));
 }, 200);
 
@@ -76,8 +79,8 @@ window.addEventListener('keydown', (e) => keyMap[e.key] = true);
 window.addEventListener('keyup', (e) => keyMap[e.key] = false);
 
 const gameLoop = (timeStamp: any) => {
-  const gameEntity = entityManager.getEntityByComponent(componentTypes.GAME_RUNNING);
-  const gameRunning = gameEntity.getComponent<IGameRunningComponent>(componentTypes.GAME_RUNNING).isRunning();
+  const gameEntity = entityManager.getEntityByComponent(componentTypes.GAME_RUNNING)!;
+  const gameRunning = gameEntity.getComponent<IGameRunningComponent>(componentTypes.GAME_RUNNING)!.isRunning();
 
   if (!gameRunning) return;
 

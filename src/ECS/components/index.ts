@@ -4,8 +4,8 @@ import {IGraphicsComponent} from "./graphicsComponent";
 import {IPlayerMovableComponent} from "./playerMoveableComponent";
 import {IScoreComponent} from "./scoreComponent";
 import {ITextComponent} from "./textComponent";
-import { IDirectioncomponent } from "./directionComponent";
+import { IDirectionComponent } from "./directionComponent";
 
 export type IComponent = IEatableComponent | IFoodTimerComponent |
  IGraphicsComponent | IPlayerMovableComponent | IScoreComponent |
-  ITextComponent | IDirectioncomponent
+  ITextComponent | IDirectionComponent

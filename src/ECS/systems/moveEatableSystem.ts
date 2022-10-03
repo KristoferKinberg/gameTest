@@ -2,14 +2,14 @@ import componentTypes from "../componentTypes";
 import EntityManager from "../entity/entityManager";
 import {IGraphicsComponent} from "../components/graphicsComponent";
 import {appHeight, appWidth, foodMaxR} from "../../constants";
-import {Direction, IDirectioncomponent} from "../components/directionComponent";
+import {Direction, IDirectionComponent} from "../components/directionComponent";
 
 const moveEatableSystems = () => {
   const EatableEntities = EntityManager.getEntitiesByComponents([componentTypes.EATABLE]);
 
   EatableEntities.forEach((entity) => {
     const graphicsComponent = entity.getComponent<IGraphicsComponent>(componentTypes.SPRITE);
-    const direction = entity.getComponent<IDirectioncomponent>(componentTypes.DIRECTION)?.getDirection();
+    const direction = entity.getComponent<IDirectionComponent>(componentTypes.DIRECTION)?.getDirection();
     const isAlive = entity.hasComponent(componentTypes.IS_ALIVE);
 
     if (!graphicsComponent) return;

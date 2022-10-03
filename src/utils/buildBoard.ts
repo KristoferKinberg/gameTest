@@ -14,7 +14,7 @@ const floorTiles = [
 ];
 
 const WEED = 'WEED';
-const weedPerTile = 1.5;
+const weedPerTile = 2;
 
 export const weedSprites = Object.keys(TILE_TYPES).filter((key) => key.includes(WEED));
 
@@ -38,7 +38,7 @@ export default (app: PIXI.Application) => setTimeout(() => {
     floorSprite.position.x = i * tileWidth;
     floorSprite.position.y = appHeight - tileWidth;
     container.addChild(floorSprite);
-  } 
+  }
 
   for(let i = 0; i < (weedPerTile*columns); i++) {
     const minWeedSize = 75;

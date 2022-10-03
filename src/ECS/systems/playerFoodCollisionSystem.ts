@@ -9,7 +9,7 @@ import {IGameRunningComponent} from "../components/gameRunningComponent";
 import {TILE_TYPES} from "../../utils/tileMap";
 import spriteComponent, {ISpriteComponent} from "../components/spriteComponent";
 import {IEntity} from "../entity/entityGenerator";
-import {Direction, IDirectioncomponent} from "../components/directionComponent";
+import {Direction, IDirectionComponent} from "../components/directionComponent";
 
 const playerFoodCollisionSystem = ({ entities, app }: ISystemParams) =>
   entities.forEach((entity: any) => {
@@ -50,7 +50,7 @@ const playerFoodCollisionSystem = ({ entities, app }: ISystemParams) =>
 
       graphicsObject.destroy();
       eatableEntity.removeComponents(componentTypes.EATABLE, componentTypes.SPRITE, componentTypes.IS_ALIVE);
-      const directionComponent = eatableEntity.getComponent<IDirectioncomponent>(componentTypes.DIRECTION);
+      const directionComponent = eatableEntity.getComponent<IDirectionComponent>(componentTypes.DIRECTION);
       const newSpriteComponent = eatableEntity.addComponent<ISpriteComponent>(spriteComponent({
         ...dimensions,
         type: TILE_TYPES[(`${fishColor}_${BONE}` as TILE_TYPES)],
@@ -116,7 +116,7 @@ const playerFoodCollisionSystem = ({ entities, app }: ISystemParams) =>
         if (isValidCollision(eatable)) {
           const playerIsBigger = playerGraphicsObject.width > eatableGraphics.width;
 
-          if (!playerIsBigger) endGame();
+          if (!playerIsBigger) return endGame();
 
           changeEatenFishToSkeleton(eatable);
           updatePlayerEntity();
