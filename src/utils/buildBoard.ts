@@ -10,7 +10,6 @@ const floorTiles = [
   TILE_TYPES.FLOOR4,
   TILE_TYPES.FLOOR5,
   TILE_TYPES.FLOOR6,
-  TILE_TYPES.FLOOR7,
 ];
 
 const WEED = 'WEED';
@@ -40,7 +39,7 @@ export default (app: PIXI.Application) => setTimeout(() => {
     container.addChild(floorSprite);
   }
 
-  for(let i = 0; i < (weedPerTile*columns); i++) {
+  for(let i = 0; i < (weedPerTile*rows); i++) {
     const minWeedSize = 75;
     const maxWeedSize = 225;
     const size = Math.floor(Math.random() * (minWeedSize - maxWeedSize + 1) + maxWeedSize);
