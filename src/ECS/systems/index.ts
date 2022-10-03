@@ -12,6 +12,8 @@ import {IEntity} from "../entity/entityGenerator";
 import speedSystem from "./speedSystem";
 import timerSystem from "./bubbleGeneratorSystem";
 import bubbleMoverSystem from "./bubbleMoverSystem";
+import backgroundEventSystem from "./backgroundEventSystem";
+import moveBackgroundAnimalSystem from "./moveBackgroundAnimalSystem";
 
 export interface ISystemParams {
   entities: IEntity[],
@@ -37,7 +39,9 @@ export const systemsManager = () => {
     moveEatableSystems,
     speedSystem,
     timerSystem,
-    bubbleMoverSystem
+    bubbleMoverSystem,
+    backgroundEventSystem,
+    moveBackgroundAnimalSystem
   ];
 
   const requiredComponentsAreInUse = (dependencies: componentTypes[]) => {

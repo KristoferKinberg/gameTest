@@ -11,7 +11,6 @@ import textComponent from "./ECS/components/textComponent";
 import gameRunningComponent, {IGameRunningComponent} from "./ECS/components/gameRunningComponent";
 import componentTypes from "./ECS/componentTypes";
 import speedComponent from "./ECS/components/speedComponent";
-//import {generateSprite, TILE_TYPES} from "./utils/tileMap";
 import buildBoard from "./utils/buildBoard";
 import spriteComponent from "./ECS/components/spriteComponent";
 import {generateSprite, TILE_TYPES} from "./utils/tileMap";
@@ -22,8 +21,12 @@ import {BUBBLE_TIMER_ID} from "./ECS/systems/bubbleGeneratorSystem";
 const app = new PIXI.Application({ width: appWidth, height: appHeight });
 
 setTimeout(() => {
-  const weedSprite = generateSprite(TILE_TYPES.WEED_13);
-  app.stage.addChild(weedSprite);
+  const sharkSprite = generateSprite(TILE_TYPES.SHARK);
+  sharkSprite.width = 200;
+  sharkSprite.height = 100;
+  sharkSprite.alpha = .4;
+
+  app.stage.addChild(sharkSprite);
 }, 50)
 
 buildBoard(app);
@@ -61,6 +64,7 @@ scoreEntity.addComponent(textComponent({
 
 const gameEntity = entityManager.createEntity();
 gameEntity.addComponent(foodTimerComponent());
+gameEntity.addComponent(timerComponent({ timerId: 'BACKGROUND_EVENT', endTime: 2 }));
 gameEntity.addComponent(gameRunningComponent({ running: true }));
 
 document
@@ -94,4 +98,4 @@ const gameLoop = (timeStamp: any) => {
 
 setTimeout(() => {
   window.requestAnimationFrame(gameLoop);
-}, 200)
+}, 200);

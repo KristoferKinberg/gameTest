@@ -57,6 +57,9 @@ export enum TILE_TYPES {
   WEED_26 = "WEED_26",
   WEED_27 = "WEED_27",
   BUBBLE = "BUBBLE",
+  SHARK = "SHARK",
+  SQUID = "SQUID",
+  WHALE = "WHALE",
 }
 
 const floorCords = {
@@ -118,9 +121,17 @@ export const tiles = {
   [TILE_TYPES.WEED_27]: [1664, 512, 128, 128],
 }
 
+const nonTiles = {
+  [TILE_TYPES.BUBBLE]: '/assets/bubble.png',
+  [TILE_TYPES.SHARK]: '/assets/shark.png',
+  [TILE_TYPES.SQUID]: '/assets/squid.png',
+  [TILE_TYPES.WHALE]: '/assets/whale.png',
+}
+
 export const generateSprite = (type: TILE_TYPES) => {
   if (type === undefined) debugger;
-  if (type === TILE_TYPES.BUBBLE) return PIXI.Sprite.from('/assets/bubble.png');
+  if (Object.keys(nonTiles).includes(type))
+    return PIXI.Sprite.from(nonTiles[type]);
 
   const texture = getTexture();
   texture.frame = new PIXI.Rectangle(...tiles[type]);
